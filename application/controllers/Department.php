@@ -23,8 +23,28 @@ class Department extends CI_Controller {
     {
         $data['content']=$this->Department_model->select_departments();
         $this->load->view('admin/header');
-        $this->load->view('admin/manage-department',$data);
+
+        // Fetch departments from the department table
+        $this->db->select('id, department_name');
+        $this->db->from('department_tbl');
+        $query = $this->db->get();
+        $departments = $query->result_array();
+    
+        // Fetch employee count for each department from the employee table
+        foreach ($departments as $key => $department) {
+            $this->db->select('COUNT(id) as employee_count');
+            $this->db->from('staff_tbl');
+            $this->db->where('department_id', $department['id']);
+            $query = $this->db->get();
+            $employee_count = $query->row_array()['employee_count'];
+            $departments[$key]['employee_count'] = $employee_count;
+        }
+    
+        $data['content'] = $departments;
+    
+        $this->load->view('admin/manage-department', $data);
         $this->load->view('admin/footer');
+
     }
 
     public function insert()
