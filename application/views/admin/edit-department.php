@@ -52,7 +52,9 @@
                       <div class="form-group">
                         <label>Department Name</label>
                         <input type="hidden" name="txtid" value="<?php echo $cnt['id']; ?>" class="form-control">
-                        <input type="text" name="txtdepartment" value="<?php echo $cnt['department_name']; ?>" class="form-control" placeholder="Department Name">
+                        <input type="text" name="txtdepartment" value="<?php echo $cnt['department_name']; ?>" class="form-control" placeholder="Department Name"> <br>
+                        <label>Funds</label>
+                        <input type="text" name="txtfunds" value="<?php echo $cnt['department_funds']; ?>" class="form-control" placeholder="Department Funds">
                       </div>
                     </div>
                     

@@ -57,7 +57,8 @@ class Department extends CI_Controller {
     {
         $id=$this->input->post('txtid');
         $department=$this->input->post('txtdepartment');
-        $data=$this->Department_model->update_department(array('department_name'=>$department),$id);
+        $funds=$this->input->post('txtfunds');
+        $data=$this->Department_model->update_department(array('department_name'=>$department,'department_funds'=>$funds),$id);
         if($this->db->affected_rows() > 0)
         {
             $this->session->set_flashdata('success', "Department Updated Succesfully"); 
