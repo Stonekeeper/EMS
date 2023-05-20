@@ -48,7 +48,14 @@ class Department_model extends CI_Model {
         $this->db->affected_rows();
     }
 
-    
+    public function get_employees_by_department_id($id) {
+        $this->db->select('*');
+        $this->db->from('staff_tbl');
+        $this->db->join('department_tbl', 'department_tbl.id = staff_tbl.department_id');
+        $this->db->where('department_id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 
 

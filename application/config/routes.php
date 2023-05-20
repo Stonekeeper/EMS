@@ -63,6 +63,8 @@ $route['manage-department'] = 'department/manage_department';
 $route['edit-department/(:num)'] = 'department/edit/$1';
 $route['update-department'] = 'department/update';
 $route['delete-department/(:num)'] = 'department/delete/$1';
+$route['view-employees/(:num)'] = 'department/view_employees/$1';
+
 
 //staff routes
 $route['add-staff'] = 'staff';
