@@ -78,9 +78,18 @@ class Salary extends CI_Controller {
                     'total' => $total[$i],
                     'added_by' => $added)
                 );
+
+                // Get the department ID for the staff
+            $staff = $this->Staff_model->get_staff_byID($id[$i]);
+            $department_id = $staff['department_id'];
+
+            // Subtract the total value from the department_funds for the specific department
+            $this->db->set('department_funds', 'department_funds - ' . $total[$i], FALSE);
+            $this->db->where('id', $department_id);
+            $this->db->update('department_tbl');
             }
         }
-        
+
         if($this->db->affected_rows() > 0)
         {
             $this->session->set_flashdata('success', "Salary Added Succesfully"); 

@@ -10,6 +10,13 @@ class Staff_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function get_staff_byID($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('staff_tbl');
+        return $query->row_array(); // Return a single row as an associative array
+    }
+
     function select_staff()
     {
         $this->db->order_by('staff_tbl.id','DESC');

@@ -43,7 +43,8 @@ class Department extends CI_Controller {
     public function insert()
     {
         $department=$this->input->post('txtdepartment');
-        $data=$this->Department_model->insert_department(array('department_name'=>$department));
+        $funds=$this->input->post('txtfunds');
+        $data=$this->Department_model->insert_department(array('department_name'=>$department,'department_funds'=>$funds));
         if($data==true)
         {
             $this->session->set_flashdata('success', "New Department Added Succesfully"); 
