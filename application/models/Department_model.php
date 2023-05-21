@@ -32,6 +32,14 @@ class Department_model extends CI_Model {
         }
     }
 
+    function select_department_byID2($department_id)
+    {
+
+        $this->db->where('id', $department_id);
+        $query = $this->db->get('department_tbl');
+        return $query->row_array();
+    }
+
     function delete_department($id)
     {
         $this->db->where('id', $id);
