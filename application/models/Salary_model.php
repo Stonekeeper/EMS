@@ -10,6 +10,7 @@ class Salary_model extends CI_Model {
         $this->db->affected_rows();
     }
 
+
     function select_salary()
     {
         $this->db->order_by('staff_tbl.id','DESC');

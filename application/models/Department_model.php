@@ -32,6 +32,14 @@ class Department_model extends CI_Model {
         }
     }
 
+    function select_department_byID2($department_id)
+    {
+
+        $this->db->where('id', $department_id);
+        $query = $this->db->get('department_tbl');
+        return $query->row_array();
+    }
+
     function delete_department($id)
     {
         $this->db->where('id', $id);
@@ -48,7 +56,14 @@ class Department_model extends CI_Model {
         $this->db->affected_rows();
     }
 
-    
+    public function get_employees_by_department_id($id) {
+        $this->db->select('*');
+        $this->db->from('staff_tbl');
+        $this->db->join('department_tbl', 'department_tbl.id = staff_tbl.department_id');
+        $this->db->where('department_id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 
 

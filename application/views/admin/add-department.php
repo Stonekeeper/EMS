@@ -49,7 +49,9 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputPassword1">Department Name</label>
-                    <input type="text" name="txtdepartment" class="form-control" placeholder="Department Name">
+                    <input type="text" name="txtdepartment" class="form-control" placeholder="Department Name"> <br>
+                    <label for="exampleInputPassword1">Funds</label>
+                    <input type="text" name="txtfunds" class="form-control" placeholder="Department funds">
                   </div>
                 </div>
                 

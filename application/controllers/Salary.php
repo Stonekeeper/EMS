@@ -70,17 +70,38 @@ class Salary extends CI_Controller {
         $salary=array();
         for ($i=0; $i < count($id); $i++)
         { 
-            if($total[$i]>0)
+            if ($total[$i] > 0)
             {
-                $data=$this->Salary_model->insert_salary(array('staff_id' => $id[$i],
-                    'basic_salary' => $basic[$i],
-                    'allowance' => $allowance[$i],
-                    'total' => $total[$i],
-                    'added_by' => $added)
-                );
+                // Check if the department funds are enough
+                $staff = $this->Staff_model->get_staff_byID($id[$i]);
+                $department_id = $staff['department_id'];
+                $department = $this->Department_model->select_department_byID2($department_id);
+                $department_funds = $department['department_funds'];
+                $department_name = $department['department_name'];
+
+    
+                if ($department_funds >= $total[$i]) {
+                    // Subtract the total value from the department_funds for the specific department
+                    $this->db->set('department_funds', 'department_funds - ' . $total[$i], FALSE);
+                    $this->db->where('id', $department_id);
+                    $this->db->update('department_tbl');
+    
+                    // Insert the salary
+                    $data = $this->Salary_model->insert_salary(array(
+                        'staff_id' => $id[$i],
+                        'basic_salary' => $basic[$i],
+                        'allowance' => $allowance[$i],
+                        'total' => $total[$i],
+                        'added_by' => $added
+                    ));
+                } else {
+                    // Department funds are not enough, display an error message
+                    $this->session->set_flashdata('error', "Insufficient funds for department: $department_name. To increase funds " . anchor('department/manage_department', 'click here'));
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
             }
         }
-        
+
         if($this->db->affected_rows() > 0)
         {
             $this->session->set_flashdata('success', "Salary Added Succesfully"); 

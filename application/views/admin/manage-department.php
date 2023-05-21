@@ -46,7 +46,7 @@
                 <tr>
                   <th>#</th>
                   <th>Department Name</th>
-                  <th> View </th>
+                  <th>Funds </th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -59,10 +59,11 @@
                     <tr>
                       <td><?php echo $i; ?></td>
                       <td><?php echo $cnt['department_name']; ?></td>
-                      <td> <?php echo $cnt['employee_count']; ?><td>
+                      <td><?php echo $cnt['department_funds']; ?></td>
                       <td>
                         <a href="<?php echo base_url(); ?>edit-department/<?php echo $cnt['id']; ?>" class="btn btn-success">Edit</a>
                         <a href="<?php echo base_url(); ?>delete-department/<?php echo $cnt['id']; ?>" class="btn btn-danger">Delete</a>
+                        <a href="<?php echo base_url(); ?>view-employees/<?php echo $cnt['id']; ?>" class="btn btn-info">View</a>
                       </td>
                     </tr>
                   <?php 
